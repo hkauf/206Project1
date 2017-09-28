@@ -15,16 +15,15 @@ def getData(file):
 	splitdata = [newline.strip().split(',') for newline in usefile.readlines()]
 	headings= splitdata[0]
 	alldata = []
-	for name in splitdata[1:]:
+	for info in splitdata[1:]:
 		backgroundinfo = {}
-		backgroundinfo[headings[0]] = 
-		backgroundinfo[headings[1]] = 
-		backgroundinfo[headings[2]] = 
-		backgroundinfo[headings[3]] = 
-		backgroundinfo[headings[4]] = 
-		addtolist= alldata.append(backgroundinfo)
-	return addtolist
-
+		backgroundinfo[headings[0]] = info[0]
+		backgroundinfo[headings[1]] = info[1]
+		backgroundinfo[headings[2]] = info[2]
+		backgroundinfo[headings[3]] = info[3]
+		backgroundinfo[headings[4]] = info[4]
+		alldata.append(backgroundinfo)
+	return alldata
 
 
 
@@ -34,7 +33,10 @@ def mySort(data,col):
 #Output: Return a string of the form firstName lastName
 
 	#Your code here:
-	pass
+	newlist = sorted (data, key =lambda x: x[col])
+	newperson = newlist[0]
+	return newperson['First'] + " " + newperson['Last']
+
 
 #Create a histogram
 def classSizes(data):
@@ -44,8 +46,13 @@ def classSizes(data):
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
 	#Your code here:
-	pass
+	classes = {}
+	for dic in data:
+		if dic["Class"] not in classes:
+			classes[dic["Class"]] = 0
+		classes[dic["Class"]] += 1
 
+	return sorted (classes.items(), key = lambda x: x[1], reverse = True)
 
 
 # Find the most common day of the year to be born
@@ -53,9 +60,20 @@ def findDay(a):
 # Input: list of dictionaries
 # Output: Return the day of month (1-31) that is the
 # most often seen in the DOB
+	dic = {}
+	for student in a:
+		date = student["DOB"].split('/')[1]
+		if date in dic:
+			dic[date] +=1
+		else:
+			dic[date] = 1
+	days = list(dic.keys())
+	mostcommon_day = days[0]
+	for x in days:
+		if dic[x] > dic[mostcommon_day]:
+			mostcommon_day = x
+	return int(mostcommon_day)
 
-	#Your code here:
-	pass
 
 
 # Find the average age (rounded) of the Students
