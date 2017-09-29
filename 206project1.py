@@ -81,9 +81,23 @@ def findAge(a):
 # Input: list of dictionaries
 # Output: Return the day of month (1-31) that is the
 # most often seen in the DOB
-
-	#Your code here:
-	pass
+	import datetime
+	avg_age = []
+	for date in a[1:]:
+		datasplit = date["DOB"].split("/")
+		month = datasplit[0]
+		day = datasplit[2]
+		year = datasplit[3:]
+		thisyear = int(datetime.date.today().year)
+		thismonth = int(datetime.date.today().month)
+		today = int(datetime.date.today().day)
+		if ((today > int(day)) and thismonth >int(month)):
+			avg_age.append(thisyear - int(year))
+		else:
+			avg_age.append(thisyear - int(year)+1)
+	return int(round((sum(avg_age)/len(avg_age)), 0))
+	
+	
 
 #Similar to mySort, but instead of returning single
 #Student, all of the sorted data is saved to a csv file.
@@ -92,8 +106,11 @@ def mySortPrint(a,col,fileName):
 #Output: None
 
 	#Your code here:
-	pass
+	# newfile = sorted(a, key = lambda x: x[col])
+	# keys = sor[0].keys()
+	# print
 
+	pass
 
 
 ################################################################
