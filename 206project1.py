@@ -83,18 +83,28 @@ def findAge(a):
 # most often seen in the DOB
 	import datetime
 	avg_age = []
+
 	for date in a[1:]:
-		datasplit = date["DOB"].split("/")
-		month = datasplit[0]
-		day = datasplit[2]
-		year = datasplit[3:]
+
+		month, day, year = date["DOB"].split("/")
 		thisyear = int(datetime.date.today().year)
 		thismonth = int(datetime.date.today().month)
 		today = int(datetime.date.today().day)
-		if ((today > int(day)) and thismonth >int(month)):
-			avg_age.append(thisyear - int(year))
+
+		if int(year) == int("2017"):
+			if ((today > int(day)) and thismonth >int(month)):
+				if int(month) == 1 or 2 or 3:
+					avg_age.append(int('1'))
+				else:
+					avg_age.append(int('0'))
+			else:
+				avg_age.append(int('0'))
 		else:
-			avg_age.append(thisyear - int(year)+1)
+			if ((today > int(day)) and thismonth >int(month)):
+				avg_age.append(thisyear - int(year))
+			else:
+				avg_age.append(thisyear - int(year)+1)
+
 	return int(round((sum(avg_age)/len(avg_age)), 0))
 	
 	
@@ -105,12 +115,14 @@ def mySortPrint(a,col,fileName):
 #Input: list of dictionaries, key to sort by and output file name
 #Output: None
 
-	#Your code here:
-	# newfile = sorted(a, key = lambda x: x[col])
-	# keys = sor[0].keys()
-	# print
+	# Your code here:
+	import csv
+	newfile = sorted(a, key = lambda x: x[col])
+	fileName= open(fileName.csv,'w')
+	for aline in a:
+		fileName.write("First\n Last\n Email").format(a)
 
-	pass
+	fileName.close()
 
 
 ################################################################
